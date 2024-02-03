@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="path/to/style.css">
+    <title>Login Page</title>
+</head>
+
+<body>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-image: url("https://woorise.com/wp-content/uploads/2021/03/Online-registration.png");
+            width: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        #myForm {
+            max-width: 400px;
+            width: 100%;
+            background-color: #fff;
+            padding: 30px;
+            margin: 50px auto;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        #age,
+        #nation {
+            width: 95%;
+        }
+
+        .box {
+            display: flex;
+        }
+
+        .line {
+            width: 50%;
+        }
+
+        .cap {
+            color: #2980b9;
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        input[type="submit"] {
+            background-color: #3498db;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+    </style>
+    </table>
+    <div id="myForm">
+        <h1 class="cap">Update your information</h1>
+        <label for="login">Username</label>
+        <input value="<%= obj.name %>" id="login" type="text" required>
+
+        <label for="accounttype">Account Type</label>
+        <input value="<%= obj.accounttype %>" id="accounttype" type="text" required>
+
+        <label for="mail">Email</label>
+        <input value="<%= obj.email %>" id="mail" type="email" required>
+
+        <label for="pass">Password</label>
+        <input value="<%= obj.password %>" id="pass" type="password" required>
+        <div class="box">
+            <div class="line">
+                <label for="age">Age</label>
+                <input value="<%= obj.age %>" id="age" type="text" required>
+            </div>
+            <div class="line">
+                <label for="nation">Nationality</label>
+                <input value="<%= obj.nation %>" id="nation" type="text" required>
+            </div>
+            <input type="hidden" name="id" id="id" value="<%= obj._id %>">
+        </div>
+        <input type="submit" onclick='changeValue()' value="Submit">
+    </div>
+    <script>
+        var text = document.getElementById("text")
+        var login = document.getElementById("login");
+        var accounttype = document.getElementById("accounttype");
+        var mail = document.getElementById("mail");
+        var pass = document.getElementById("pass");
+        var age = document.getElementById("age");
+        var nation = document.getElementById("nation");
+        var id = document.getElementById("id");
+        async function changeValue() {
+            await fetch("/updateData", {
+                method: "POST",
+                headers: {
+                    'Content-Type': "application/json"
+                },
+                body: JSON.stringify({ fullname: login.value, accounttype: accounttype.value, mail: mail.value, password: pass.value, age: age.value, nation: nation.value, id: id.value })
+            });
+            window.location.href = "/";
+        }
+    </script>
+</body>
+
+</html>

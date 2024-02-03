@@ -4,28 +4,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 
 <body>
-    <ul>
-        <% info.forEach(function(justOne) { %>
-        <li>
-        Id - <strong><%= justOne.theaterId %></strong> <br>
-        City - <strong><%= justOne.location.address.city %></strong> /
-        State - <strong><%= justOne.location.address.state %></strong> /
-        Zip code - <strong><%= justOne.location.address.zipcode %></strong> /
-        Street - <strong><%= justOne.location.address.street1 %></strong> <br> <br>
-        </li>
-        <% }); %>
-        </ul>
-            <!-- <form action="/addInfo" method="post"> -->
-            <input id="login" type="text" name="login">
-            <input id="mail" type="email" name="email">
-            <input id="pass" type="password" name="password">
-            <input type="submit" onclick="getValue()" value="Submit">
-            <!-- </form> -->
-            <script src="script.js"></script>
+    <table>
+        <thead>
+            <tr>
+                <th>Login</th>
+                <th>Account Type</th>
+                <th>Email</th>
+                <th>Age</th>
+                <th>Nation</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% info.forEach(function(justOne) { %>
+                <tr>
+                    <td><strong>
+                            <%= justOne.name %>
+                        </strong></td>
+                    <td><strong>
+                            <%= justOne.accounttype %>
+                        </strong></td>
+                    <td><strong>
+                            <%= justOne.email %>
+                        </strong></td>
+                    <td><strong>
+                            <%= justOne.age %>
+                        </strong></td>
+                    <td><strong>
+                            <%= justOne.nation %>
+                        </strong></td>
+                    <td>
+                        <a class="update" href="update/<%= justOne._id %>">Update</a>
+                        <a class="delete" href="delete/<%= justOne._id %>">Delete</a>
+                    </td>
+                </tr>
+                <% }); %>
+        </tbody>
+    </table>
+    <div id="myForm">
+        <h1 class="cap">Enter your information</h1>
+        <label for="login">Username</label>
+        <input id="login" type="text" required>
+
+        <label for="accounttype">Account Type</label>
+        <input id="accounttype" type="text" required>
+
+        <label for="mail">Email</label>
+        <input id="mail" type="email" required>
+
+        <label for="pass">Password</label>
+        <input id="pass" type="password" required>
+        <div class="box">
+            <div class="line">
+                <label for="age">Age</label>
+                <input id="age" type="text" required>
+            </div>
+            <div class="line">
+                <label for="nation">Nationality</label>
+                <input id="nation" type="text" required>
+            </div>
+        </div>
+        <input type="submit" onclick='getValue()' value="Submit">
+    </div>
 </body>
+
+<script src="script.js"></script>
 
 </html>

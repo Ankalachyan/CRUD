@@ -1,14 +1,18 @@
 var text = document.getElementById("text")
-console.log(text.innerHTML);
 var login = document.getElementById("login");
-var pass = document.getElementById("pass");
+var accounttype = document.getElementById("accounttype");
 var mail = document.getElementById("mail");
+var pass = document.getElementById("pass");
+var age = document.getElementById("age");
+var nation = document.getElementById("nation");
+var id = document.getElementById("id");
+
 function getValue() {
     fetch("http://localhost:3000/addInfo", {
         method: "POST",
         headers: {
             'Content-Type': "application/json"
         },
-        body:JSON.stringify({login:login.value,password:pass.value, mail:login.mail})
-    } )
+        body: JSON.stringify({ fullname: login.value, accounttype: accounttype.value, mail: mail.value, password: pass.value, age: age.value, nation: nation.value })
+    })
 }

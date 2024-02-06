@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Login Page</title>
+</head>
+<style>
+
+</style>
+
+<body>
+    <div>
+        <h1 class="caption">Here You Can See All The Information</h1>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Login</th>
+                <th>Account Type</th>
+                <th>Email</th>
+                <th>Age</th>
+                <th>Nation</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% info.forEach(function(justOne) { %>
+                <tr>
+                    <td><strong>
+                            <%= justOne.name %>
+                        </strong></td>
+                    <td><strong>
+                            <%= justOne.accounttype %>
+                        </strong></td>
+                    <td><strong>
+                            <%= justOne.email %>
+                        </strong></td>
+                    <td><strong>
+                            <%= justOne.age %>
+                        </strong></td>
+                    <td><strong>
+                            <%= justOne.nation %>
+                        </strong></td>
+                    <td>
+                        <a class="update" href="update/<%= justOne._id %>">Update</a>
+                        <a class="delete" href="delete/<%= justOne._id %>">Delete</a>
+                    </td>
+                </tr>
+                <% }); %>
+        </tbody>
+    </table>
+    <div class="box1">
+        <button onclick="backPage()">Back To Login Page</button>
+    </div>
+</body>
+<script src="script.js"></script>
+
+</html>

@@ -14,5 +14,13 @@ function getValue() {
             'Content-Type': "application/json"
         },
         body: JSON.stringify({ fullname: login.value, accounttype: accounttype.value, mail: mail.value, password: pass.value, age: age.value, nation: nation.value })
-    })
+    });
+    if (login.value == "" || accounttype.value == "" || mail.value == "" || pass.value == "" || age.value == "" || nation.value == "") {
+        alert("please enter fields properly")
+    } else {
+        window.location.href = "/getInfo";
+    }
+}
+function backPage() {
+    window.location.href = "/"
 }

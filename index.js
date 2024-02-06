@@ -17,19 +17,34 @@ app.get("/", function (req, res) {
     db.once('open', async () => {
         console.log('Connected to MongoDB!');
         try {
-            const mascots = await mongoose.connection.db.collection('users').find().toArray();
-            res.render('../public/form.ejs', {
-                info : mascots
-            })
+            res.render('../public/form.ejs')
         } catch (error) {
-            console.error('Error retrieving movies:', error);
+            console.error('Error retrieving users:', error);
         } finally {
             mongoose.connection.close();
         }
     });
-  
-});
 
+});
+app.get("/getInfo", function (req, res) {
+    mongoose.connect(connectionString, { useNewUrlParser: true, useUnifiedTopology: true });
+    const db = mongoose.connection;
+    db.on('error', console.error.bind(console, 'Connection error:'));
+    db.once('open', async () => {
+        console.log('Connected to MongoDB!');
+        try {
+            const mascots = await mongoose.connection.db.collection('users').find().toArray();
+            res.render('../public/info.ejs', {
+                info: mascots
+            })
+        } catch (error) {
+            console.error('Error retrieving users:', error);
+        } finally {
+            mongoose.connection.close();
+        }
+    });
+
+});
 app.post("/addInfo", function (req, res) {
     const fullname = req.body.fullname;
     const accounttype = req.body.accounttype;
@@ -38,7 +53,7 @@ app.post("/addInfo", function (req, res) {
     const age = req.body.age;
     const nation = req.body.nation;
 
-    console.log(fullname,accounttype,mail,password,age,nation)
+    console.log(fullname, accounttype, mail, password, age, nation)
     mongoose.connect(connectionString, { useNewUrlParser: true, useUnifiedTopology: true });
     const db = mongoose.connection;
     db.on('error', console.error.bind(console, 'Connection error:'));
@@ -65,28 +80,28 @@ app.post("/addInfo", function (req, res) {
 });
 app.get("/delete/:id", function (req, res) {
     var id = req.params.id;
-       mongoose.connect(connectionString, { useNewUrlParser: true, useUnifiedTopology: true });
-       const db = mongoose.connection;
-       db.on('error', console.error.bind(console, 'Connection error:'));
-       db.once('open', async () => {
-           try {
-               let result = await mongoose.connection.db.collection('users').deleteOne({_id: new ObjectId(id)});
-               res.redirect("/")
-           } catch (error) {
-               console.error('Error retrieving movies:', error);
-           } finally {
-               mongoose.connection.close();
-           }
-       })
-   });
-   app.get("/update/:id", function (req, res) {
+    mongoose.connect(connectionString, { useNewUrlParser: true, useUnifiedTopology: true });
+    const db = mongoose.connection;
+    db.on('error', console.error.bind(console, 'Connection error:'));
+    db.once('open', async () => {
+        try {
+            let result = await mongoose.connection.db.collection('users').deleteOne({ _id: new ObjectId(id) });
+            res.redirect("/getInfo")
+        } catch (error) {
+            console.error('Error retrieving values:', error);
+        } finally {
+            mongoose.connection.close();
+        }
+    })
+});
+app.get("/update/:id", function (req, res) {
     var id = req.params.id;
     mongoose.connect(connectionString, { useNewUrlParser: true, useUnifiedTopology: true });
     const db = mongoose.connection;
     db.on('error', console.error.bind(console, 'Connection error:'));
     db.once('open', async () => {
         try {
-            let result = await mongoose.connection.db.collection('users').findOne({_id: new ObjectId(id)});
+            let result = await mongoose.connection.db.collection('users').findOne({ _id: new ObjectId(id) });
             res.render('../public/update.ejs', {
                 obj: result
             });
@@ -119,17 +134,20 @@ app.post("/updateData", function (req, res) {
         try {
             let result = await mongoose.connection.db.collection('users').updateOne(
                 { _id: new ObjectId(id) },
-                { $set: {  
-                    name: fullname,
-                    accounttype: accounttype,
-                    email: mail,
-                    password: password,
-                    age: age,
-                    nation: nation } }
+                {
+                    $set: {
+                        name: fullname,
+                        accounttype: accounttype,
+                        email: mail,
+                        password: password,
+                        age: age,
+                        nation: nation
+                    }
+                }
             );
             res.json({ res: result });
         } catch (error) {
-            console.error('Error updating product:', error);
+            console.error('Error updating user:', error);
         } finally {
             mongoose.connection.close();
         }

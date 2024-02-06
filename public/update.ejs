@@ -7,79 +7,97 @@
     <link rel="stylesheet" href="path/to/style.css">
     <title>Login Page</title>
 </head>
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        background-image: url("https://4kwallpapers.com/images/wallpapers/glossy-abstract-3440x1440-9602.jpg");
+        width: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 1300px;
+
+    }
+
+
+    #myForm {
+        max-width: 500px;
+        height: 700px;
+        background-color: #b3c2cecb;
+        padding: 40px;
+        margin: 50px auto;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+        font-size: 19px;
+        color: #4a2480;
+    }
+
+    #age,
+    #nation {
+        width: 95%;
+    }
+
+    .box {
+        display: flex;
+        justify-content: space-between;
+        width: 512px;
+    }
+
+    .line {
+        width: 50%;
+    }
+
+    .cap {
+        color: #483c79;
+        ;
+        text-align: center;
+        margin-bottom: 65px;
+        font-size: 35px;
+    }
+
+    input {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 20px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 14px;
+    }
+
+    input[type="submit"] {
+        background-color: #483c79;
+        color: #fff;
+        cursor: pointer;
+        font-size: 17px;
+        border: none;
+        margin-top: 20px;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #302655;
+    }
+
+    .caption {
+        font-size: 40px;
+        text-align: center;
+        margin: 50px;
+        color: #ddd;
+        letter-spacing: 1px;
+    }
+</style>
 
 <body>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            background-image: url("https://woorise.com/wp-content/uploads/2021/03/Online-registration.png");
-            width: 100%;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-
-        #myForm {
-            max-width: 400px;
-            width: 100%;
-            background-color: #fff;
-            padding: 30px;
-            margin: 50px auto;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-        }
-
-        label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        #age,
-        #nation {
-            width: 95%;
-        }
-
-        .box {
-            display: flex;
-        }
-
-        .line {
-            width: 50%;
-        }
-
-        .cap {
-            color: #2980b9;
-            text-align: center;
-            margin-bottom: 35px;
-        }
-
-        input {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 20px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 14px;
-        }
-
-        input[type="submit"] {
-            background-color: #3498db;
-            color: #fff;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #2980b9;
-        }
-    </style>
+    <h1 class="caption">Here You Can Update Your Values</h1>
     </table>
     <div id="myForm">
         <h1 class="cap">Update your information</h1>
@@ -124,7 +142,7 @@
                 },
                 body: JSON.stringify({ fullname: login.value, accounttype: accounttype.value, mail: mail.value, password: pass.value, age: age.value, nation: nation.value, id: id.value })
             });
-            window.location.href = "/";
+            window.location.href = "/getInfo";
         }
     </script>
 </body>
